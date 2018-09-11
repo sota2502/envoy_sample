@@ -1,0 +1,11 @@
+h1 = 'Books'
+
+table
+  thead
+    th = 'name'
+    th = 'published at'
+  tbody
+    - @books.each do |book|
+      tr
+        td = book.name
+        td = book.published_at.strftime('%Y-%m-%d')
