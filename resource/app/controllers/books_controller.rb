@@ -3,9 +3,16 @@ class BooksController < ApplicationController
 
   # GET /books
   def index
-    @books = Book.all
+    @books = Book.includes(:author, :publisher).all
 
-    render json: @books
+    # render json: @books
+    render jsonapi: @books,
+           class: {
+             Book: SerializableBook,
+             Author: SerializableAuthor,
+             Publisher: SerializablePublisher
+           },
+           include: [:author, :publisher]
   end
 
   # GET /books/1
